@@ -65,32 +65,53 @@ def main() -> None:
 # ФУНКЦИИ ФОРМИРОВАНИЯ ЧИСЛОВЫХ ДИАПАЗОНОВ
 
     # 13. Возвращает одномерный массив с равномерно разнесенными числами указанного диапазона
-    arange = np.arange()
-
+    arange = np.arange(5)
+    print(f'13.1 \n{arange}', end='\n\n')
+    arange = np.arange(1, 5)
+    print(f'13.2 \n{arange}', end='\n\n')
+    arange = np.arange(1, 5, 0.5)
+    print(f'13.3 \n{arange}', end='\n\n')
+    arange = np.arange(0, np.pi, 0.1)
+    print(f'13.4 \n{arange}', end='\n\n')
+    arange = np.cos(np.arange(0, np.pi, 0.1))
+    print(f'13.5 \n{arange}', end='\n\n')
 
     # 14. Возвращает одномерный массив с равномерно разнесенными числами, используя значения только начала и конца интервала
-    linspace = np.linspace()
-
+    linspace = np.linspace(0, np.pi, 0)
+    print(f'14.1 \n{linspace}', end='\n\n')
+    linspace = np.linspace(0, np.pi, 1)
+    print(f'14.2 \n{linspace}', end='\n\n')
+    linspace = np.linspace(0, np.pi, 2)
+    print(f'14.3 \n{linspace}', end='\n\n')
+    linspace = np.linspace(0, np.pi, 3)
+    print(f'14.4 \n{linspace}', end='\n\n')
 
     # 15. Возвращает одномерный массив с числами, равномерно распределенных по логарифмической шкале
-    logspace = np.logspace()
+    logspace = np.logspace(0, 1, 3)
+    print(f'15. \n{logspace}', end='\n\n')
+
 
 
     # 16. Формирование чисел по геометрической прогрессии
-    geomspace = np.geomspace()
+    geomspace = np.geomspace(1, 4, 3)
+    print(f'16.1 \n{geomspace}', end='\n\n')
+    geomspace = np.geomspace(1, 16, 5)
+    print(f'16.2 \n{geomspace}', end='\n\n')
 
 
-    # 17. xl, ..., xn - одномерные последовательности или массивы, используемые для фоормирования координатной сетки по кадой из осей
-    meshgrid = np.meshgrid()
+    #  Формирование графиков
+    # # 17. xl, ..., xn - одномерные последовательности или массивы, используемые для фоормирования координатной сетки по кадой из осей
+    # meshgrid = np.meshgrid()
 
 
-    # 18. Возвращает массив плотных координатных сеток
-    mgrid = mgrid[]
+    # # 18. Возвращает массив плотных координатных сеток
+    # mgrid = mgrid[]
 
 
-    # 19. Возвращает открытую сетку значений
-    ogrid = ogrid[]
+    # # 19. Возвращает открытую сетку значений
+    # ogrid = ogrid[]
 
+    
 
 
 
