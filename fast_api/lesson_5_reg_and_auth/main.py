@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from auth.auth import auth_backend
 from auth.schemas import UserCreate, UserRead
 from fastapi_users import FastAPIUsers
