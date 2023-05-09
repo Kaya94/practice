@@ -1,27 +1,30 @@
 from typing import Annotated
 
-from fastapi import Depends, FastAPI
+from fastapi import FastAPI
+from auth.auth import auth_backend
+from auth.schemas import UserCreate, UserRead
+from fastapi_users import FastAPIUsers
+from auth.database import User
+from auth.manager import get_user_manager
 
 app = FastAPI(
     title="Trading App"
 )
 
+fastapi_users = FastAPIUsers[User, int](
+    get_user_manager,
+    [auth_backend],
+)
 
-async def common_parameters(
-        q: str | None = None, skip: int = 0, limit: int = 100
-):
-    return {"q": q, "skip": skip, "limit": limit}
-
-
-@app.get("/items/")
-async def read_items(
-    commons: Annotated[dict, Depends(common_parameters)]
-):
-    return commons
+app.include_router(
+    fastapi_users.get_auth_router(auth_backend),
+    prefix="/auth/jwt",
+    tags=["auth"],
+)
 
 
-@app.get("/users/")
-async def read_users(
-    commons: Annotated[dict, Depends(common_parameters)]
-):
-    return commons
+app.include_router(
+    fastapi_users.get_register_router(UserRead, UserCreate),
+    prefix="/auth",
+    tags=["auth"],
+)
