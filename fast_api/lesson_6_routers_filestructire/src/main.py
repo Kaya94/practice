@@ -1,11 +1,10 @@
-from typing import Annotated
-
 from fastapi import FastAPI, Depends
 from auth.auth import auth_backend
 from auth.schemas import UserCreate, UserRead
 from fastapi_users import FastAPIUsers
 from database import User
 from auth.manager import get_user_manager
+from operations.router import router as operations_router
 
 app = FastAPI(
     title="Trading App"
