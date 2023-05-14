@@ -1,6 +1,6 @@
 from celery import Celery
 import smtplib
-from config import SMTP_HOST, SMTP_PORT, SMTP_PASS, SMTP_USER
+from src.config import SMTP_HOST, SMTP_PORT, SMTP_PASS, SMTP_USER
 from email.message import EmailMessage
 
 
