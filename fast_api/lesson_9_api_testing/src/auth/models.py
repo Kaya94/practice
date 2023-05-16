@@ -1,4 +1,4 @@
-from sqlalchemy import MetaData, Table, Column, Integer, String, TIMESTAMP, ForeignKey, JSON, Boolean
+from sqlalchemy import Table, Column, Integer, String, TIMESTAMP, ForeignKey, JSON, Boolean
 from datetime import datetime
 from database import Base
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTable
@@ -10,7 +10,8 @@ role = Table(
     metadata,
     Column("id", Integer, primary_key=True),
     Column("name", String, nullable=False),
-    Column("permissions", JSON)
+    Column("permissions", JSON),
+    extend_existing=True
 )
 
 user = Table(
@@ -24,10 +25,12 @@ user = Table(
     Column("hashed_password", String, nullable=False),
     Column("is_active", Boolean, default=True, nullable=False),
     Column("is_superuser", Boolean, default=False, nullable=False),
-    Column("is_verified", Boolean, default=False, nullable=False)
+    Column("is_verified", Boolean, default=False, nullable=False),
+    extend_existing=True
 )
 
 class User(SQLAlchemyBaseUserTable[int], Base):
+    __table_args__ = {'extend_existing': True}
     id = Column(Integer, primary_key=True)
     email = Column(String, nullable=False)
     username = Column(String, nullable=False)

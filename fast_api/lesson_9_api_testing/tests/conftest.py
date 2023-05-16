@@ -1,7 +1,7 @@
 from config import (
     DB_HOST_TEST, DB_NAME_TEST, DB_PASS_TEST, DB_PORT_TEST, DB_USER_TEST
     )
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession,
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from src.database import metadata, get_async_session
 from typing import AsyncGenerator
 from src.main import app
@@ -28,7 +28,7 @@ async def override_get_async_session() -> AsyncGenerator[AsyncSession, None]:
     async with async_session_maker() as session:
         yield session
 
-app.dependecy_overrides[get_async_session] = override_get_async_session
+app.dependency_overrides[get_async_session] = override_get_async_session
 
 # Используем фикстуру для автоматического создания и удаления бд после прогона тестов
 @pytest.fixture(autouse=True, scope='session')
