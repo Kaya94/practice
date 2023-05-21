@@ -13,7 +13,7 @@ from tasks.router import router as router_tasks
 from fastapi.middleware.cors import CORSMiddleware
 from pages.router import router as router_pages
 from fastapi.staticfiles import StaticFiles
-
+from chat.router import router as router_chat
 
 app = FastAPI(
     title="Trading App"
@@ -55,6 +55,7 @@ def unprotected_route():
 app.include_router(router_operation)
 app.include_router(router_tasks)
 app.include_router(router_pages)
+app.include_router(router_chat)
 
 # Выбираем адреса сайтов, которые могут общаться с нашим аппи
 origins = [
