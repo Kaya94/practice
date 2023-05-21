@@ -1,7 +1,14 @@
-from fastapi import WebSocket, WebSocketDisconnect, APIRouter
+from typing import List
+
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends
+from pydantic import BaseModel
+from sqlalchemy import insert, select
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from chat.models import Messages
-from database import async_session_maker
-from sqlalchemy import insert
+from chat.schemas import MessagesModel
+from database import async_session_maker, get_async_session 
+
 
 # Создаем роутер и добавляем его в main.py
 router = APIRouter(
@@ -51,8 +58,21 @@ class ConnectionManager:
             # Сделать комит
             session.commit()
 
+
 # Создаем экземпляр класса ConnectionManager. Обьявляем менеджера
 manager = ConnectionManager()
+
+
+# Выводим клиенту пять последних сообщений через ендпоинт
+@router.get("/last_messages")
+async def get_last_messages(
+        session: AsyncSession = Depends(get_async_session),
+) -> List[MessagesModel]:
+    query = select(Messages).order_by(Messages.id.desc()).limit(5)
+    messages = await session.execute(query)
+    return messages.scalars().all()
+    
+    
 
 @router.websocket("/ws/{client_id}")
 # Получаем id клиента и добавляем его в список соединений менеджера
